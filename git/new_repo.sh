@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+# Usage:
 # ./git/new_repo.sh $REPO_NAME
+
 REPO_NAME=$1
 
 # 1. Creates $REPO_NAME folder
