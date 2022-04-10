@@ -30,7 +30,7 @@ while [[ $# -gt 0 ]]; do
       SHELL='fish'
       shift
       ;;
-    --*)
+    -*|--*)
       echo "Unknown option $1"
       exit 1
       ;;
