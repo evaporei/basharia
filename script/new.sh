@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Usage:
-# ./script/new.sh $SCRIPT_NAME
+# ./script/new.sh [--bash|--sh|--zsh|--fish] $SCRIPT_NAME
+
 SCRIPT_NAME=$1
 
 SHEBANG_PREFIX='#!/usr/bin/env'
