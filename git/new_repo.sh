@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Usage:
 # ./git/new_repo.sh $REPO_NAME
 
@@ -28,4 +30,17 @@ USERNAME=$(curl -s "https://api.github.com/search/users?q=$EMAIL" | jq '.items[0
 # 7. Set remote SSH URL
 git remote add origin git@github.com:$USERNAME/$REPO_NAME.git
 
-# TODO: add option for creating repo on Github via `gh` (or curl maybe, tho auth will be annoying)
+# 8. Check if Github CLI is installed
+if ! command -v gh &> /dev/null; then
+  echo "Github CLI 'gh' not found, exit successfully without creating repository to Github"
+  exit 0
+fi
+
+REPO_VISIBILITY=$2
+REPO_VISIBILITY="${REPO_VISIBILITY:---private}"
+
+# 9. Create repository on Github as well
+gh repo create $REPO_NAME $REPO_VISIBILITY
+
+# 10. Push local git repository with initial commit containing README.md
+git push --set-upstream origin main
