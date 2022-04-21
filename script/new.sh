@@ -41,10 +41,15 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+SCRIPT_FLAGS=$(cat <<-END
+set -e
+END
+)
+
 SCRIPT_NAME=$POSITIONAL_ARGS
 
 # 1. Create $SCRIPT_NAME file with shebang and chosen shell
-echo "$SHEBANG_PREFIX $SHELL" > $SCRIPT_NAME
+printf "$SHEBANG_PREFIX $SHELL\n\n$SCRIPT_FLAGS\n\n" > $SCRIPT_NAME
 
 # 2. Make it an executable
 chmod +x $SCRIPT_NAME
